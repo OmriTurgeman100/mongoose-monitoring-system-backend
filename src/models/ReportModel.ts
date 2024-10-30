@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const reportSchema = new mongoose.Schema({
+  reportId: {
+    type: String,
+    required: [true, "reporId is required"],
+  },
   title: {
     type: String,
     required: [true, "title is required"],
@@ -15,6 +19,7 @@ const reportSchema = new mongoose.Schema({
   parent: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Node",
+    default: null,
   },
 });
 

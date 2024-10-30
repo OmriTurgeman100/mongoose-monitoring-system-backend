@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import Node from "../models/NodeModel";
+import Report from "../models/ReportModel";
 
 export const post_nodes: RequestHandler = async (req, res, next) => {
   try {
@@ -31,10 +32,13 @@ export const get_nodes: RequestHandler = async (req, res, next) => {
 
 export const get_specific_node: RequestHandler = async (req, res, next) => {
   try {
-    const data = await Node.find({ parent: req.params.id });
+    const nodes = await Node.find({ parent: req.params.id });
+
+    const reports = await Report.find({ parent: req.params.id });
 
     res.status(200).json({
-      nodes: data,
+      nodes: nodes,
+      reports: reports,
     });
   } catch (error) {
     res.status(400).json({
