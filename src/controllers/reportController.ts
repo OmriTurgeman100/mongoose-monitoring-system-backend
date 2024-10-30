@@ -3,14 +3,21 @@ import Report from "../models/ReportModel";
 
 export const post_report: RequestHandler = async (req, res, next) => {
   try {
-    const { reportId } = req.body;
+    const { reportId, parent } = req.body;
 
     const created_report = await Report.create(req.body);
 
     const reports = await Report.find({ reportId: reportId });
 
-    for (const report of reports) {
-      console.log(report);
+    if (!parent) {
+      for (const report of reports) {
+        if (report.parent) {
+          await Report.create({
+            ...req.body,
+            parent: report.parent,
+          });
+        }
+      }
     }
 
     res.status(201).json({
