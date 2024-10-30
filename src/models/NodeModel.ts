@@ -17,6 +17,7 @@ const nodeSchema = new mongoose.Schema({
   parent: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Node",
+    default: null,
   },
 });
 
