@@ -13,8 +13,8 @@ export const post_report: RequestHandler = async (req, res, next) => {
       for (const report of reports) {
         if (report.parent) {
           await Report.create({
-            ...req.body,
-            parent: report.parent,
+            ...req.body,         
+            parent: report.parent 
           });
         }
       }
