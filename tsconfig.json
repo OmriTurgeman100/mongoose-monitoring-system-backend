@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",           // Output directory for compiled files
+    "rootDir": "./src",           // Root directory for TypeScript files
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true
+  },
+  "include": ["src/**/*.ts"],     // Include TypeScript files in src folder
+  "exclude": ["node_modules"]
+}
