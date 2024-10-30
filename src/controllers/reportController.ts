@@ -3,7 +3,15 @@ import Report from "../models/ReportModel";
 
 export const post_report: RequestHandler = async (req, res, next) => {
   try {
+    const { reportId } = req.body;
+
     const created_report = await Report.create(req.body);
+
+    const reports = await Report.find({ reportId: reportId });
+
+    for (const report of reports) {
+      console.log(report);
+    }
 
     res.status(201).json({
       data: created_report,
@@ -31,7 +39,9 @@ export const get_reports: RequestHandler = async (req, res, next) => {
 
 export const get_empty_reports: RequestHandler = async (req, res, next) => {
   try {
-    const empty_reports = await Report.find({ parent: null }).distinct( 'reportId' );
+    const empty_reports = await Report.find({ parent: null }).distinct(
+      "reportId"
+    );
     res.status(200).json({
       data: empty_reports,
     });
